@@ -1,6 +1,5 @@
 class Solution {
     public List<String> generateParenthesis(int n) {
-        //Rupak
     List<String> list= new ArrayList<>();
      paren( list ,"",0,0,n);
      return list;
