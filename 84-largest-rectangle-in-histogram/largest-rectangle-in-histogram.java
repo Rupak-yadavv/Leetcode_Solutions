@@ -1,29 +1,24 @@
 class Solution {
     public int largestRectangleArea(int[] heights) {
-      int [] prefix = new int [heights.length];
-      Stack <Integer> st = new Stack<>();
-      for (int i =0;i<heights.length ;i++){
-        while (!st.empty() && heights[st.peek()]>=heights[i]){
-            st.pop();
+
+// more optimised code everything is in single pass last code time complexity is also O(n)but  space complexity is also more than this one //
+      Stack<Integer> st = new Stack<>();
+        int max = 0;
+        for (int i = 0; i <= heights.length; i++) {
+            int curr = (i == heights.length) ? 0 : heights[i];
+            while (!st.empty() && heights[st.peek()] > curr) {
+                int h = heights[st.pop()];
+                int width;
+                if (st.empty()) {
+                    width = i;
+                } else {
+                    width = i - st.peek() - 1;
+                }
+                max = Math.max(max, h * width);
+            }
+
+            st.push(i);
         }
-        if (st.empty()) prefix[i]=-1;
-        else prefix[i]=st.peek();
-        st.push(i);
-      }
-      st.clear(); 
-      int sufix[] = new int [heights.length];
-      for (int i =heights.length-1;i>=0 ;i--){
-        while (!st.empty() && heights[st.peek()]>heights[i]){
-            st.pop();
-        }
-        if (st.empty()) sufix[i]=heights.length;
-        else sufix[i]=st.peek();
-        st.push(i);
-      }
-      int max =0;
-      for (int i =0;i<heights.length;i++){
-        max = Math.max(max , heights[i]*(sufix[i] - prefix[i]-1));
-      }
       return max ;
     
     }
