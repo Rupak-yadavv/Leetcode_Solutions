@@ -1,19 +1,16 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        List<Integer> list = new ArrayList<>();
-        createsubset(nums , 0 , res , list);
-        return res ;
-       
-    }
-    static void createsubset(int []nums , int index , List<List<Integer>> res , List<Integer> list ){
-        if (index==nums.length){
-            res.add(new ArrayList<>(list));
-            return ;
+        int n = nums.length;
+        int subset = 1<<n;
+        List<List<Integer>> ans = new ArrayList<>();
+        for (int num =0;num<subset ;num++){
+            List<Integer> list = new ArrayList<>();
+            for (int j =0;j<n;j++){
+                if((num&(1<<j))!=0)list.add(nums[j]);
+            }
+             ans.add(list);
         }
-       list.add(nums[index]);
-        createsubset(nums , index+1 , res , list);
-        list.remove(list.size()-1);
-        createsubset(nums , index+1 , res , list);
+        return ans ;
+        
     }
 }
