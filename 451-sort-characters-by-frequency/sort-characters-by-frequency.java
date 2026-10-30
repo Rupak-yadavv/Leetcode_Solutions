@@ -20,13 +20,13 @@ class Solution {
             int freq=map.get(ch);
             pq.add(new helper(ch ,freq));
         }
-        String ans="";
+         StringBuilder ans = new StringBuilder();
         while(!pq.isEmpty()){
             helper top =pq.remove();
              for (int i = 0; i < top.freq; i++) {
-               ans+=top.ch;
+               ans.append(top.ch);
              }
         }
-        return ans;    
+        return ans.toString();    
     }
 }
