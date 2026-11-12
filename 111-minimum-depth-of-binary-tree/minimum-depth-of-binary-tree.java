@@ -18,8 +18,6 @@ class Solution {
         if(root==null)return 0;
         if(root.right==null )return 1+minDepth(root.left);
         if(root.left==null )return 1+minDepth(root.right);
-        int leftside = minDepth(root.left);
-        int rightside = minDepth(root.right);
-        return 1+Math.min(leftside , rightside);
+        return 1+Math.min(minDepth(root.left),minDepth(root.right));
     }
 }
